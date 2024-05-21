@@ -1,0 +1,78 @@
+[
+  {
+    "name": "CreateRequestFunction",
+    "scriptFile": "ChessGameSolution.dll",
+    "entryPoint": "Company.Function.CreateRequestFunction.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "req",
+        "direction": "In",
+        "type": "httpTrigger",
+        "authLevel": "Anonymous",
+        "methods": [
+          "post"
+        ],
+        "route": "knightpath",
+        "properties": {}
+      },
+      {
+        "name": "$return",
+        "type": "http",
+        "direction": "Out"
+      }
+    ]
+  },
+  {
+    "name": "GetResultFunction",
+    "scriptFile": "ChessGameSolution.dll",
+    "entryPoint": "Company.Function.GetResultFunction.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "req",
+        "direction": "In",
+        "type": "httpTrigger",
+        "authLevel": "Anonymous",
+        "methods": [
+          "get"
+        ],
+        "route": "knightpath",
+        "properties": {}
+      },
+      {
+        "name": "$return",
+        "type": "http",
+        "direction": "Out"
+      }
+    ]
+  },
+  {
+    "name": "ProcessRequestFunction",
+    "scriptFile": "ChessGameSolution.dll",
+    "entryPoint": "Company.Function.ProcessRequestFunction.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "requests",
+        "direction": "In",
+        "type": "cosmosDBTrigger",
+        "databaseName": "ChessGameDB",
+        "containerName": "KnightMoveRequests",
+        "connection": "chessdb_DOCUMENTDB",
+        "leaseContainerName": "leases",
+        "createLeaseContainerIfNotExists": true,
+        "properties": {}
+      }
+    ]
+  }
+]
